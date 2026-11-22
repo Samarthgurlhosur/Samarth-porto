@@ -37,16 +37,16 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
   const glowX = useTransform(px, [-1, 1], ['-6%', '6%']);
 
   const meta = [
-    education[0].period.split(' – ')[0].split(' ')[1] + ' – Present',
-    'B.Tech AI & ML',
+    '2023 – 2027',
+    'B.Tech CSE',
     `${projects.length} Originals`,
     `${certifications.length} Certifications`,
   ];
 
   const floating = [
-    { text: education[0].score, sub: 'B.Tech AI & ML', pos: 'left-[2%] top-[30%]', depth: 1 },
-    { text: `${achievements[0].title}`, sub: achievements[0].org, pos: 'right-[0%] top-[18%]', depth: -1 },
-    { text: 'Java · React · Node.js', sub: 'Primary stack', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
+    { text: education[0].score, sub: 'B.Tech CSE · GMU', pos: 'left-[2%] top-[30%]', depth: 1 },
+    { text: `${achievements[0].title}`, sub: 'Minearena Hackathon', pos: 'right-[0%] top-[18%]', depth: -1 },
+    { text: 'Agentic AI · FastAPI · Python', sub: 'Primary Stack', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
   ];
 
   return (
@@ -72,42 +72,43 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
         <span className="light-streak left-[55%] top-[44%] w-[30vw]" style={{ animationDelay: '5.2s' }} />
       </div>
 
-      {/* portrait */}
+      {/* hero background visual */}
       <motion.div
-        className="absolute inset-x-0 top-12 z-[2] flex h-[64svh] items-end justify-center sm:h-[70svh] lg:bottom-0 lg:left-auto lg:right-[3vw] lg:top-20 lg:h-auto lg:w-[54vw] xl:right-[6vw] xl:w-[48vw]"
+        className="pointer-events-none absolute inset-0 z-[2] overflow-hidden"
         style={{ y: imgY, scale: imgScale, opacity: fade }}
       >
         <motion.div
-          className="relative h-full w-full lg:h-[86vh]"
+          className="relative h-full w-full"
           style={{ rotateY: imgRotY, rotateX: imgRotX, x: imgShiftX, transformPerspective: 1200 }}
-          initial={{ clipPath: 'inset(100% -30% -10% -30%)', opacity: 0 }}
-          animate={{ clipPath: 'inset(-30% -30% -10% -30%)', opacity: 1 }}
-          transition={{ duration: 1.6, ease: EASE, delay: 0.1 }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.4, ease: EASE }}
         >
-          {/* rim light ring */}
-          <div aria-hidden className="absolute bottom-[8%] left-1/2 h-[78%] w-[78%] -translate-x-1/2 rounded-full border border-crimson-2/20 shadow-[0_0_120px_rgba(229,19,43,0.35),inset_0_0_80px_rgba(229,19,43,0.18)]" />
-          <img
-            src={profile.portrait.src}
-            srcSet={profile.portrait.srcSet}
-            sizes="(max-width: 1024px) 100vw, 54vw"
-            alt={profile.portrait.alt}
+          <picture>
+            <source srcSet="/assets/hero-bg-1920.webp 1920w, /assets/hero-bg.webp 1024w" sizes="100vw" type="image/webp" />
+            <img
+              src="/assets/hero-bg.webp"
+              alt={profile.portrait.alt}
+              className="absolute inset-0 h-full w-full select-none object-cover object-[78%_center] sm:object-[75%_center] md:object-[72%_center] lg:object-right"
+            />
+          </picture>
 
-            className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] [mask-image:linear-gradient(to_bottom,black_62%,transparent_97%)]"
-          />
-          {/* crimson rim light on the image edge */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_80%_30%,rgba(255,61,90,0.16),transparent_70%)] mix-blend-screen" />
-
-          {/* floating UI chips */}
-          {floating.map((f, i) => (
-            <FloatChip key={f.text} {...f} index={i} mx={chipX} my={chipY} />
-          ))}
+          {/* subtle crimson glow on the portrait */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_80%_35%,rgba(255,61,90,0.14),transparent_70%)] mix-blend-screen" />
         </motion.div>
       </motion.div>
 
+      {/* floating UI chips */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-[3] w-full lg:w-[50vw]">
+        {floating.map((f, i) => (
+          <FloatChip key={f.text} {...f} index={i} mx={chipX} my={chipY} />
+        ))}
+      </div>
+
       {/* readability gradients */}
-      <div aria-hidden className="absolute inset-x-0 top-[40svh] z-[3] h-[36svh] bg-gradient-to-b from-transparent via-ink/70 to-ink lg:hidden" />
-      <div aria-hidden className="absolute inset-0 z-[3] hidden bg-[linear-gradient(90deg,var(--color-ink)_0%,rgba(7,7,10,0.7)_32%,transparent_58%)] lg:block" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 z-[3] h-48 bg-gradient-to-t from-ink to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[35svh] z-[3] h-[45svh] bg-gradient-to-b from-transparent via-ink/85 to-ink lg:hidden" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-[3] hidden bg-[linear-gradient(90deg,var(--color-ink)_0%,rgba(7,7,10,0.96)_36%,rgba(7,7,10,0.7)_52%,transparent_72%)] lg:block" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-48 bg-gradient-to-t from-ink via-ink/75 to-transparent" />
 
       {/* copy */}
       <motion.div
@@ -128,7 +129,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
         </motion.p>
 
         <motion.div variants={item} className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px] font-medium text-mist">
-          <span className="rounded border border-white/25 px-1.5 py-px text-[10px] font-bold tracking-wider text-bone">AI·ML</span>
+          <span className="rounded border border-white/25 px-1.5 py-px text-[10px] font-bold tracking-wider text-bone">AI · AGENTS</span>
           {meta.map((m, i) => (
             <span key={m} className="flex items-center gap-3">
               {i > 0 && <span className="h-1 w-1 rounded-full bg-smoke" />}
@@ -137,12 +138,20 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
           ))}
         </motion.div>
 
-        <motion.p variants={item} className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-bone/90 sm:text-xs sm:tracking-[0.34em]">
-          {profile.tagline.join(' • ')}
-        </motion.p>
+        <motion.h2 variants={item} className="mt-4 font-serif text-2xl italic text-bone/95 sm:text-3xl">
+          {profile.headline}
+        </motion.h2>
+
+        <motion.div variants={item} className="mt-3 flex flex-wrap gap-1.5">
+          {profile.heroTags.map((tag) => (
+            <span key={tag} className="glass rounded-full px-2.5 py-1 text-[11px] font-semibold text-bone/90 backdrop-blur">
+              {tag}
+            </span>
+          ))}
+        </motion.div>
 
         <motion.p variants={item} className="mt-4 max-w-xl text-[15px] leading-relaxed text-bone/80 sm:text-base">
-          {profile.intro}
+          Computer Science student and AI developer building intelligent applications, AI agents, RAG systems, and practical software solutions.
         </motion.p>
 
         <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">

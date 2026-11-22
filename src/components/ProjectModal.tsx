@@ -66,8 +66,13 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
               ✕
             </button>
             <div className="absolute inset-x-0 bottom-0 px-5 pb-6 sm:px-10">
-              <motion.p className="mb-2 flex items-center gap-2 text-[11px] font-bold tracking-[0.34em] text-bone/80" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+              <motion.p className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-bold tracking-[0.34em] text-bone/80" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
                 <span className="font-display text-xl tracking-normal text-crimson-2">S</span> ORIGINAL
+                {project.badge && (
+                  <span className="rounded-full border border-amber-400/50 bg-amber-400/20 px-3 py-0.5 text-[10px] font-bold tracking-widest text-amber-300 shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+                    {project.badge}
+                  </span>
+                )}
               </motion.p>
               <motion.h2
                 id={`title-${project.id}-modal`}

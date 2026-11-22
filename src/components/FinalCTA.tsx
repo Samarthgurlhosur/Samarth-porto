@@ -15,9 +15,10 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
 
   const ctas = [
     { label: "Let's Build", href: `mailto:${profile.email}?subject=${encodeURIComponent("Let's build something")}`, primary: true, cursor: 'play' },
+    { label: 'Email', href: `mailto:${profile.email}`, cursor: 'link' },
+    { label: 'Call', href: `tel:${profile.phone}`, cursor: 'link' },
     { label: 'LinkedIn', href: profile.links.linkedin, cursor: 'link' },
     { label: 'GitHub', href: profile.links.github, cursor: 'link' },
-    { label: 'Email', href: `mailto:${profile.email}`, cursor: 'link' },
   ];
 
   return (
@@ -49,6 +50,7 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
       >
         <p className="font-sans text-2xl font-semibold tracking-[0.2em] text-bone sm:text-3xl">{profile.displayName.toUpperCase()}</p>
         <p className="mt-2 text-xs font-semibold tracking-[0.4em] text-mist sm:text-sm">{profile.role.toUpperCase()}</p>
+        <p className="mt-2 text-xs font-medium tracking-[0.2em] text-smoke">{profile.location.toUpperCase()} · +91 {profile.phone}</p>
       </motion.div>
 
       <motion.div
